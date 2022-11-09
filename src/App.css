@@ -5,18 +5,6 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -32,10 +20,25 @@
   }
 }
 
-.card {
-  padding: 2em;
+/* Nav Component styles */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100% - 4em);
+  padding: 0 2em;
+  height: 65px;
+  background: #53525254;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-.read-the-docs {
-  color: #888;
+/* Form Component styles */
+
+.form-box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 7px;
 }

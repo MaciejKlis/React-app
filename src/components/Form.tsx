@@ -1,21 +1,24 @@
 import React, {useState} from "react";
 
+declare let ethereum: any;
+
 const Form = () => {
     const [reciverAddress, setReciverAddress] = useState('')
     const [amount, setAmount] = useState(0)
     const [wethAmount, setWethAmount] = useState(0)
 
-    const handleReciverAddress = (e) => {
+    const handleReciverAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
         setReciverAddress(e.target.value)
     }
 
-    const handleAmount = (e) => {
-        const amount = e.target.value
+    const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const amount = parseFloat(e.target.value);
+        console.log(amount)
         setAmount(amount);
         setWethAmount(amount * 10 ** 18);
     }
 
-    const sendTransaction = () => {
+    const sendTransaction = async () => {
         const params = [{
             to: reciverAddress,
             value: '0x' + (wethAmount).toString(16),
@@ -23,17 +26,12 @@ const Form = () => {
             chainId: '0x5',
         }]
 
-        ethereum
-            .request({
-                method: 'eth_sendTransaction',
-                params,
-            })
-            .then((result) => {
-                console.log(result)
-            })
-            .catch((error) => {
-                console.log(error)
-            });
+        const transactionRequest = await ethereum.request({
+            method: 'eth_sendTransaction',
+            params,
+        })
+
+        console.log(transactionRequest)
     }
     
 
@@ -42,7 +40,7 @@ const Form = () => {
             <label>Send to:</label>
             <input type="text" name="address" onChange={handleReciverAddress} placeholder="ex. 0x2fa1B5dF32e7EfE18f2924ad574f3A653c844e79"/>
             <label>Amount:</label>
-            <input type="number" name="amount" onChange={handleAmount} placeholder="ex. 0.02"/>
+            <input type="number" name="amount" min="0" step="0.0005" onChange={handleAmount} placeholder="ex. 0.0015"/>
             <button onClick={sendTransaction}> Send </button>
         </div>
     )
