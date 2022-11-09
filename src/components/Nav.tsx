@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { render } from "react-dom";
 
 declare let ethereum: any;
 
-const Nav = () => {    
+interface IProps {
+    setIsConnected: (value: boolean) => void
+}
+
+const Nav = ({setIsConnected}:IProps) => {    
     const [walletAddr, setWalletAddr] = useState("");
 
     const connectWallet = async () => {
         if(window.ethereum) {
-            const accounts = await ethereum.request({ method: 'eth_requestAccounts' }); 
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             const account = accounts[0];
             setWalletAddr(account);
+            setIsConnected(true);
         } else {
             alert('Install metamask !');
         }

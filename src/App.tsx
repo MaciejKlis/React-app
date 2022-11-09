@@ -3,15 +3,16 @@ import './App.css'
 import Form from './components/Form'
 import Navbar from './components/Nav' 
 function App() {
-  const [count, setCount] = useState<number>(0)
+  const [isConnected, setIsConnected] = useState(false);
+  
 
   return (
     <div>
-      <Navbar/>
-        <div className="app">
-          <h1>Transaction on georli </h1>
-          <Form />
-        </div>
+      <Navbar setIsConnected={setIsConnected}/>
+      <div className="app">
+        <h1>Transaction on georli </h1>
+        <Form isConnected={isConnected}/>
+      </div>
     </div>
   )
 }

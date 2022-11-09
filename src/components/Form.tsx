@@ -2,7 +2,11 @@ import React, {useState} from "react";
 
 declare let ethereum: any;
 
-const Form = () => {
+interface IProps {
+    isConnected: boolean
+}
+
+const Form = (props:IProps) => {
     const [reciverAddress, setReciverAddress] = useState('')
     const [amount, setAmount] = useState(0)
     const [wethAmount, setWethAmount] = useState(0)
@@ -13,7 +17,6 @@ const Form = () => {
 
     const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
         const amount = parseFloat(e.target.value);
-        console.log(amount)
         setAmount(amount);
         setWethAmount(amount * 10 ** 18);
     }
@@ -33,15 +36,15 @@ const Form = () => {
 
         console.log(transactionRequest)
     }
-    
-
+ 
     return (
         <div className="form-box">
+            {!props.isConnected ? <h3>connect wallet to send transaction</h3> : null}
             <label>Send to:</label>
-            <input type="text" name="address" onChange={handleReciverAddress} placeholder="ex. 0x2fa1B5dF32e7EfE18f2924ad574f3A653c844e79"/>
+            <input disabled={!props.isConnected} type="text" name="address" onChange={handleReciverAddress} placeholder="ex. 0x2fa1B5dF32e7EfE18f2924ad574f3A653c844e79"/>
             <label>Amount:</label>
-            <input type="number" name="amount" min="0" step="0.0005" onChange={handleAmount} placeholder="ex. 0.0015"/>
-            <button onClick={sendTransaction}> Send </button>
+            <input disabled={!props.isConnected} type="number" name="amount" min="0" step="0.0005" onChange={handleAmount} placeholder="ex. 0.0015"/>
+            <button disabled={!props.isConnected} onClick={sendTransaction}> Send </button>
         </div>
     )
 }
