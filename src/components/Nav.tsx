@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { hexShortcuter } from "../utils"
 
 declare let ethereum: any;
 
@@ -22,7 +23,7 @@ const Nav = ({setIsConnected}:IProps) => {
 
     return (
         <nav className="nav">
-            <button onClick={connectWallet}> {walletAddr || 'Connect wallet'} </button>
+            <button onClick={connectWallet}> { walletAddr ? hexShortcuter(walletAddr) : 'Connect wallet'} </button>
         </nav>
     )
 }

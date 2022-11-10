@@ -13,6 +13,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --color-main: rgba(63, 63, 63, 0.525);
+  --color-border-main: rgb(21, 21, 21);
 }
 
 a {
@@ -70,10 +73,17 @@ button:disabled {
   border-color: transparent;
 }
 
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
+    --color-main: #2135476e;
+    --color-border-main: rgb(21, 21, 21);
   }
   a:hover {
     color: #f9f9f9;

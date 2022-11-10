@@ -3,7 +3,9 @@ import React, {useState} from "react";
 declare let ethereum: any;
 
 interface IProps {
-    isConnected: boolean
+    isConnected: boolean,
+    transactions: Array<string>,
+    setTransactions: (value: Array<string>) => void
 }
 
 const Form = (props:IProps) => {
@@ -34,12 +36,17 @@ const Form = (props:IProps) => {
             params,
         })
 
-        console.log(transactionRequest)
+        const transactions = props.transactions;
+        const newTransactions = [
+            transactionRequest,
+            ...transactions
+        ]
+        props.setTransactions(newTransactions);
     }
  
     return (
         <div className="form-box">
-            {!props.isConnected ? <h3>connect wallet to send transaction</h3> : null}
+            {!props.isConnected ? <h3>connect test wallet to send transaction</h3> : null}
             <label>Send to:</label>
             <input disabled={!props.isConnected} type="text" name="address" onChange={handleReciverAddress} placeholder="ex. 0x2fa1B5dF32e7EfE18f2924ad574f3A653c844e79"/>
             <label>Amount:</label>
