@@ -2,6 +2,9 @@
 
 Application to check out React with TS, Web3 
 
+Check live verion [here](https://maciejklis.github.io/React-app/)
+Hosted by github pages
+
 ## Installation
 
 ```js
