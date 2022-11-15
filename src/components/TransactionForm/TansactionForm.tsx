@@ -7,7 +7,8 @@ interface IProps {
     isConnected: boolean,
     transactions: Array<string>,
     setTransactions: (value: Array<string>) => void,
-    currentNetwork: number
+    currentNetwork: number,
+    isGeorli: boolean,
 }
 
 const Form = (props:IProps) => {
@@ -48,12 +49,13 @@ const Form = (props:IProps) => {
  
     return (
         <div className={`${classes.formBox}`}>
-            {!props.isConnected ? <h3>connect test wallet to send transaction</h3> : <h3>Current network: {props.currentNetwork}</h3>}
+            {!props.isConnected && <h3>connect test wallet to send transaction</h3>}
+            {props.isConnected && !props.isGeorli && <h3>switch network to georli</h3>}
             <label>Send to:</label>
-            <input disabled={!props.isConnected} type="text" name="address" onChange={handleReciverAddress} placeholder="ex. 0x2fa1B5dF32e7EfE18f2924ad574f3A653c844e79"/>
+            <input disabled={!(props.isConnected && props.isGeorli)} type="text" name="address" onChange={handleReciverAddress} placeholder="ex. 0x2fa1B5dF32e7EfE18f2924ad574f3A653c844e79"/>
             <label>Amount:</label>
-            <input disabled={!props.isConnected} type="number" name="amount" min="0" step="0.0005" onChange={handleAmount} placeholder="ex. 0.0015"/>
-            <button disabled={!props.isConnected} onClick={sendTransaction}> Send </button>
+            <input disabled={!(props.isConnected && props.isGeorli)} type="number" name="amount" min="0" step="0.0005" onChange={handleAmount} placeholder="ex. 0.0015"/>
+            <button disabled={!(props.isConnected && props.isGeorli)} onClick={sendTransaction}> Send </button>
         </div>
     )
 }

@@ -16,9 +16,10 @@ declare global {
 
 function App() {
   const [isConnected, setIsConnected] = useState(false);
+  const [isConnectedToGeorli, setIsConnectedtoGeorli] = useState(false);
   const [transactions, setTransactions] = useState(Array<string>);
   const [currentAccount, setCurrentAccount] = useState("");
-  const [chainId, setChainId] = useState(1231231231231231);
+  const [chainId, setChainId] = useState(0);
   const [provider, setProvider] = useState(window.ethereum);
   const [web3, setWeb3] = useState(new Web3())
 
@@ -34,12 +35,27 @@ function App() {
       setCurrentAccount(accounts[0]);
       setChainId(chainId);
       setIsConnected(true);
+      if(chainId !== 5) {
+        switchToGeorliNetwork()
+      } else {
+        setIsConnectedtoGeorli(true)
+      }
     } 
   }
 
+  const switchToGeorliNetwork = async () => {
+    setIsConnectedtoGeorli(false)
+    await ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: "0x5" }],
+    })
+    setIsConnectedtoGeorli(true)
+  }
+
+
   useEffect(() => {
     const handleAccountsChanged = async (accounts:any) => {
-      const web3Accounts = await web3.eth.getAccounts()
+      await web3.eth.getAccounts()
       if (accounts.length === 0) {
         onLogout();
       } else if (accounts[0] !== currentAccount) {
@@ -49,7 +65,11 @@ function App() {
 
     const handleChainChanged = async (chainId:any) => {
       const web3ChainId = await web3.eth.getChainId()
-      setChainId(web3ChainId)
+      if(web3ChainId !== 5) {
+        switchToGeorliNetwork()
+      } else {
+        setIsConnectedtoGeorli(true)
+      }
     }
     
     if(isConnected) {
@@ -75,7 +95,7 @@ function App() {
       <Navbar onLogin={onLogin} account={currentAccount}/>
       <div className="app">
         <h1>Transaction on georli </h1>
-        <TransactionForm isConnected={isConnected} transactions={transactions} setTransactions={setTransactions} currentNetwork={chainId} />
+        <TransactionForm isConnected={isConnected} isGeorli={isConnectedToGeorli} transactions={transactions} setTransactions={setTransactions} currentNetwork={chainId} />
         <TransactionsList transactions={transactions} />
       </div>
     </div>
