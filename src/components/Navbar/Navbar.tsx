@@ -46,8 +46,8 @@ const Nav = ({onLogin, account}:IProps) => {
 
     return (
         <nav className={`${classes.navbar}`}>
-            {isMetaMaskInstalled &&
-                (<button onClick={onLoginHandler}>
+            {isMetaMaskInstalled && (
+                <button onClick={onLoginHandler}>
                     { !account && !isConnecting && "Connect wallet" }
                     { isConnecting && "Loading ..."} 
                     { account && !isConnecting && hexShortcuter(account) }

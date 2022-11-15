@@ -6,7 +6,8 @@ declare let ethereum: any;
 interface IProps {
     isConnected: boolean,
     transactions: Array<string>,
-    setTransactions: (value: Array<string>) => void
+    setTransactions: (value: Array<string>) => void,
+    currentNetwork: number
 }
 
 const Form = (props:IProps) => {
@@ -47,7 +48,7 @@ const Form = (props:IProps) => {
  
     return (
         <div className={`${classes.formBox}`}>
-            {!props.isConnected ? <h3>connect test wallet to send transaction</h3> : null}
+            {!props.isConnected ? <h3>connect test wallet to send transaction</h3> : <h3>Current network: {props.currentNetwork}</h3>}
             <label>Send to:</label>
             <input disabled={!props.isConnected} type="text" name="address" onChange={handleReciverAddress} placeholder="ex. 0x2fa1B5dF32e7EfE18f2924ad574f3A653c844e79"/>
             <label>Amount:</label>
