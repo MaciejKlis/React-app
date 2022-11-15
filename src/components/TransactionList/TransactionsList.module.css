@@ -1,0 +1,6 @@
+.txnBox {
+    background: var(--color-main);
+    border-radius: 8px;
+    border: 1px solid var(--color-border-main);
+    margin: 10px 0;
+}

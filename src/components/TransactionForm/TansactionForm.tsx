@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import classes from "./TransactionForm.module.css"
 
 declare let ethereum: any;
 
@@ -45,7 +46,7 @@ const Form = (props:IProps) => {
     }
  
     return (
-        <div className="form-box">
+        <div className={`${classes.formBox}`}>
             {!props.isConnected ? <h3>connect test wallet to send transaction</h3> : null}
             <label>Send to:</label>
             <input disabled={!props.isConnected} type="text" name="address" onChange={handleReciverAddress} placeholder="ex. 0x2fa1B5dF32e7EfE18f2924ad574f3A653c844e79"/>

@@ -1,5 +1,6 @@
 import React from "react";
-import { hexShortcuter } from "../utils";
+import { hexShortcuter } from "../../utils/hexShortcuter";
+import classes from "./TransactionsList.module.css";
 
 interface IProps {
     transactions: Array<string>
@@ -22,7 +23,7 @@ const Transactions = ( {transactions}:IProps ) => {
 
     return (
          transactions.length ? 
-            <div className="txn-box">
+            <div className={`${classes.txnBox}`}>
                 <h3>Transactions</h3>
                 <ul>
                     {listItems}
