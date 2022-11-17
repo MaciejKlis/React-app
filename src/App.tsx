@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import TransactionForm from './components/TransactionForm/TansactionForm';
 import Navbar from './components/Navbar/Navbar';
+import Sidebar from './components/Sidebar/Sidebar';
 import TransactionsList from './components/TransactionList/TransactionsList';
 import Web3 from 'web3';
 
@@ -92,6 +93,7 @@ function App() {
 
   return (
     <div>
+      <Sidebar />
       <Navbar onLogin={onLogin} account={currentAccount}/>
       <div className="app">
         <h1>Transaction on georli </h1>
