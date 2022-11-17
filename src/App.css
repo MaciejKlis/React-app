@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+.app {
+  margin-top: 65px;
+  margin-left: 250px;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
