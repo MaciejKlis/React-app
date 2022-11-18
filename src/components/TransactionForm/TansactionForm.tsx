@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import classes from "./TransactionForm.module.css"
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../state';
 
 declare let ethereum: any;
 
 interface IProps {
     isConnected: boolean,
-    transactions: Array<string>,
-    setTransactions: (value: Array<string>) => void,
     currentNetwork: number,
     isGeorli: boolean,
 }
@@ -15,6 +16,10 @@ const Form = (props:IProps) => {
     const [reciverAddress, setReciverAddress] = useState('')
     const [amount, setAmount] = useState(0)
     const [wethAmount, setWethAmount] = useState(0)
+
+    //Store inplementation
+    const dispatch = useDispatch();
+    const { addTransaction } = bindActionCreators(actionCreators, dispatch)
 
     const handleReciverAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
         setReciverAddress(e.target.value)
@@ -39,12 +44,7 @@ const Form = (props:IProps) => {
             params,
         })
 
-        const transactions = props.transactions;
-        const newTransactions = [
-            transactionRequest,
-            ...transactions
-        ]
-        props.setTransactions(newTransactions);
+        addTransaction(transactionRequest)
     }
  
     return (

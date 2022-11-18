@@ -18,7 +18,6 @@ declare global {
 function App() {
   const [isConnected, setIsConnected] = useState(false);
   const [isConnectedToGeorli, setIsConnectedtoGeorli] = useState(false);
-  const [transactions, setTransactions] = useState(Array<string>);
   const [currentAccount, setCurrentAccount] = useState("");
   const [chainId, setChainId] = useState(0);
   const [provider, setProvider] = useState(window.ethereum);
@@ -96,9 +95,11 @@ function App() {
       <Sidebar />
       <Navbar onLogin={onLogin} account={currentAccount}/>
       <div className="app">
+  
         <h1>Transaction on georli </h1>
-        <TransactionForm isConnected={isConnected} isGeorli={isConnectedToGeorli} transactions={transactions} setTransactions={setTransactions} currentNetwork={chainId} />
-        <TransactionsList transactions={transactions} />
+        <TransactionForm isConnected={isConnected} isGeorli={isConnectedToGeorli} currentNetwork={chainId} />
+        <TransactionsList />
+      
       </div>
     </div>
   )
