@@ -1,34 +1,33 @@
 import React from "react";
 import { hexShortcuter } from "../../../utils/hexShortcuter";
 import classes from "./TransactionsList.module.css";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../state/reducers';
 
-interface IProps {
-    transactions: Array<string>
-}
+const Transactions = () => {
+    const state = useSelector((state: RootState) => state.transactions)
 
-const Transactions = ( {transactions}:IProps ) => {
-
-    const listItems = transactions.map((txn, idx) => {
+    const linkItem = (txn:string) => {
         const georliExplorer = "https://goerli.etherscan.io/tx/" + txn;
         const txnShortcut = hexShortcuter(txn) 
         
-        return(    
-            <li key={idx}>
-                <a href={georliExplorer} target="_blank">
-                    {txnShortcut}
-                </a>
-            </li>
+        return(
+            <a href={georliExplorer} target="_blank">
+                {txnShortcut}
+            </a>
         )
-    });
+    }
 
     return (
-         transactions.length ? 
-            <div className={`${classes.txnBox}`}>
-                <h3>Transactions</h3>
-                <ul>
-                    {/* {listItems} */}
-                </ul>
-            </div> : <div></div>
+        (state.length > 0 ? <div className={`${classes.txnBox}`}>
+            <h3>Transactions</h3>
+            
+            <ul>
+                {state.map(txs => {
+                    return <li key={txs}> {linkItem(txs)} </li>
+                })}
+            </ul>
+        </div> : <div></div>)
     ) 
 }
 

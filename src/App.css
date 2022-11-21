@@ -1,13 +1,14 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  height: 100%;
+  width: 100%;
 }
 
 .app {
-  margin-top: 65px;
   margin-left: 250px;
+  margin-top: 65px;
+  height: 100%;
+  max-width: 100%;
 }
 
 @keyframes logo-spin {

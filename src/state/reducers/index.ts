@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
 import transactionReducer from "./transactionReducer";
+import walletReducer from "./walletReducer"
 
 const reducers = combineReducers({
-    transactions: transactionReducer
+    transactions: transactionReducer,
+    wallet: walletReducer
 })
 
 export default reducers
