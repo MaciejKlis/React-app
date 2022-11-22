@@ -1,20 +1,24 @@
 import React, {useState} from "react";
 import classes from "./TransactionForm.module.css"
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../../state';
 
 declare let ethereum: any;
 
 interface IProps {
     isConnected: boolean,
-    transactions: Array<string>,
-    setTransactions: (value: Array<string>) => void,
-    currentNetwork: number,
-    isGeorli: boolean,
+    chainId: number,
 }
 
 const Form = (props:IProps) => {
     const [reciverAddress, setReciverAddress] = useState('')
-    const [amount, setAmount] = useState(0)
     const [wethAmount, setWethAmount] = useState(0)
+    const isGeroli = props.chainId === 5
+
+    //Store inplementation
+    const dispatch = useDispatch();
+    const { addTransaction } = bindActionCreators(actionCreators, dispatch)
 
     const handleReciverAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
         setReciverAddress(e.target.value)
@@ -22,7 +26,6 @@ const Form = (props:IProps) => {
 
     const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
         const amount = parseFloat(e.target.value);
-        setAmount(amount);
         setWethAmount(amount * 10 ** 18);
     }
 
@@ -39,23 +42,18 @@ const Form = (props:IProps) => {
             params,
         })
 
-        const transactions = props.transactions;
-        const newTransactions = [
-            transactionRequest,
-            ...transactions
-        ]
-        props.setTransactions(newTransactions);
+        addTransaction(transactionRequest)
     }
  
     return (
         <div className={`${classes.formBox}`}>
             {!props.isConnected && <h3>connect test wallet to send transaction</h3>}
-            {props.isConnected && !props.isGeorli && <h3>switch network to georli</h3>}
+            {props.isConnected && !isGeroli && <h3>switch network to georli</h3>}
             <label>Send to:</label>
-            <input disabled={!(props.isConnected && props.isGeorli)} type="text" name="address" onChange={handleReciverAddress} placeholder="ex. 0x2fa1B5dF32e7EfE18f2924ad574f3A653c844e79"/>
+            <input disabled={!(props.isConnected && isGeroli)} type="text" name="address" onChange={handleReciverAddress} placeholder="ex. 0x2fa1B5dF32e7EfE18f2924ad574f3A653c844e79"/>
             <label>Amount:</label>
-            <input disabled={!(props.isConnected && props.isGeorli)} type="number" name="amount" min="0" step="0.0005" onChange={handleAmount} placeholder="ex. 0.0015"/>
-            <button disabled={!(props.isConnected && props.isGeorli)} onClick={sendTransaction}> Send </button>
+            <input disabled={!(props.isConnected && isGeroli)} type="number" name="amount" min="0" step="0.0005" onChange={handleAmount} placeholder="ex. 0.0015"/>
+            <button disabled={!(props.isConnected && isGeroli)} onClick={sendTransaction}> Send </button>
         </div>
     )
 }
