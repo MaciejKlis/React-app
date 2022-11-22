@@ -6,6 +6,8 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
 import Wallet from '../../types/Wallet';
 import { RootState } from '../../state/reducers';
+import { store } from '../../state/store'
+
 
 //TODO: Figureout Types for Web3 support
 declare global {
@@ -18,6 +20,10 @@ declare global {
 }
 
 const Login = () => {
+  useEffect(()=>{
+    console.log('update')
+  })
+
   //Store handling
   const wallet:Wallet = useSelector((state:RootState) => state.wallet)
   const dispatch = useDispatch();

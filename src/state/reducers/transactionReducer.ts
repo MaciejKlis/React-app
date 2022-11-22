@@ -6,8 +6,10 @@ const initialState:Array<string> = [];
 const reducer = (state: Array<string> = initialState, action:Action) => {
     switch (action.type) {
         case ActionType.ADD_TRANSACTION:
-            state.push(action.txs)
-            return state
+            return [
+                ...state,
+                action.txs
+            ]
         default:
             return state
     }

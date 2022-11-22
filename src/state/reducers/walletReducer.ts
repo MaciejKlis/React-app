@@ -11,13 +11,22 @@ const initialState:Wallet = {
 const reducer = (state:Wallet = initialState, action:Action) => {
     switch (action.type) {
         case ActionType.CONNECT_WALLET:
-            return action.wallet
+            return {
+                ...state,
+                isConnected: action.wallet.isConnected,
+                chainId: action.wallet.chainId,
+                walletAddress: action.wallet.walletAddress,
+            }
         case ActionType.UPDATE_CHAIN_ID:
-            state.chainId = action.chainId
-            return state
+            return {
+                ...state,
+                chainId: action.chainId
+            }
         case ActionType.UPDATE_WALLET_ADDRESS:
-            state.walletAddress = action.walletAddress
-            return state
+            return {
+                ...state,
+                walletAddress: action.walletAddress
+            }
         default:
             return state
     }
