@@ -5,6 +5,10 @@ interface AddTransactionAction {
     txs: string
 }
 
+interface ClearTransactions {
+    type: ActionType.CLEAR_TRANSACTIONS
+}
+
 interface ConnectWalletAction {
     type: ActionType.CONNECT_WALLET
     wallet: {
@@ -24,4 +28,8 @@ interface UpdateWalletAddress {
     walletAddress: string
 }
 
-export type Action = AddTransactionAction | ConnectWalletAction | UpdateChainId | UpdateWalletAddress
+interface ResetWallet {
+    type: ActionType.RESET_WALLET
+}
+
+export type Action = AddTransactionAction | ClearTransactions | ConnectWalletAction | UpdateChainId | UpdateWalletAddress | ResetWallet

@@ -27,6 +27,13 @@ const reducer = (state:Wallet = initialState, action:Action) => {
                 ...state,
                 walletAddress: action.walletAddress
             }
+        case ActionType.RESET_WALLET:
+            return {
+                ...state,
+                isConnected: initialState.isConnected,
+                chainId: initialState.chainId,
+                walletAddress: initialState.walletAddress,
+            }
         default:
             return state
     }

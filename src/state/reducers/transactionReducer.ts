@@ -10,6 +10,8 @@ const reducer = (state: Array<string> = initialState, action:Action) => {
                 ...state,
                 action.txs
             ]
+        case ActionType.CLEAR_TRANSACTIONS:
+            return state.filter(() => false)
         default:
             return state
     }

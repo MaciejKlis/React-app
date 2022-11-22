@@ -20,14 +20,11 @@ declare global {
 }
 
 const Login = () => {
-  useEffect(()=>{
-    console.log('update')
-  })
-
+  const [connecting, setConnecting] = useState(false);
   //Store handling
   const wallet:Wallet = useSelector((state:RootState) => state.wallet)
   const dispatch = useDispatch();
-  const { connectWallet, updateChainId, updateWalletAddress } = bindActionCreators(actionCreators, dispatch)
+  const { connectWallet, updateChainId, updateWalletAddress, resetWallet, clearTransactions } = bindActionCreators(actionCreators, dispatch)
 
   //Web3
   const [provider, setProvider] = useState(window.ethereum);
@@ -53,7 +50,9 @@ const Login = () => {
 
   //Try to connect
   const onLoginHandler = async () => {
+    setConnecting(true)
     await ethereum.request({ method: 'eth_requestAccounts' });
+    setConnecting(false)
     onLogin();
   }
 
@@ -118,14 +117,17 @@ const Login = () => {
   }
 
   const onLogoutHandler = ():void => {
-    //TODO: Logout user
+    resetWallet()
+    clearTransactions()
   }
 
   return (
     <div>
       {wallet.isConnected ?
         <button onClick={onLogoutHandler}>{hexShortcuter(wallet.walletAddress)}</button>:
-        <button onClick={onLoginHandler}>Connect wallet</button>
+        <button onClick={onLoginHandler}>
+          {connecting ? "Connecting..." : "Connect wallet"}
+        </button>
       }
     </div>
   )
