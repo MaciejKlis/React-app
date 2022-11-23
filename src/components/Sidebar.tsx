@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router-dom";
-import classes from "./Sidebar.module.css"
 import MenuList from '@mui/material/MenuList';
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -12,7 +11,7 @@ const Sidebar = () => {
     const location = useLocation();
 
     return (
-        <div className={`${classes.sidebar}`}>
+        <div className="fixed w-63 h-full top-0 flex items-center bg-sidebar-bg">
             <MenuList sx={{
                 width: '100%',
             }}>

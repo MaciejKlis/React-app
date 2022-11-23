@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import Web3 from 'web3';
-import { hexShortcuter }  from '../../utils/hexShortcuter';
+import { hexShortcuter }  from '../utils/hexShortcuter';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators } from '../../state';
-import Wallet from '../../types/Wallet';
-import { RootState } from '../../state/reducers';
-import { store } from '../../state/store'
-
+import { actionCreators } from '../state';
+import Wallet from '../types/Wallet';
+import { RootState } from '../state/reducers';
 
 //TODO: Figureout Types for Web3 support
 declare global {

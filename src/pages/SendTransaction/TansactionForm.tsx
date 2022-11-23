@@ -1,8 +1,7 @@
 import React, {useState} from "react";
-import classes from "./TransactionForm.module.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators } from '../../../state';
+import { actionCreators } from '../../state';
 
 declare let ethereum: any;
 
@@ -46,9 +45,10 @@ const Form = (props:IProps) => {
     }
  
     return (
-        <div className={`${classes.formBox}`}>
+        <div className="flex flex-col gap-4">
             {!props.isConnected && <h3>connect test wallet to send transaction</h3>}
             {props.isConnected && !isGeroli && <h3>switch network to georli</h3>}
+            {props.isConnected && isGeroli && <h3>You can send transaction now</h3>}
             <label>Send to:</label>
             <input disabled={!(props.isConnected && isGeroli)} type="text" name="address" onChange={handleReciverAddress} placeholder="ex. 0x2fa1B5dF32e7EfE18f2924ad574f3A653c844e79"/>
             <label>Amount:</label>

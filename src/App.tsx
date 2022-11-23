@@ -1,6 +1,6 @@
 import './App.css';
-import Navbar from './components/Navbar/Navbar';
-import Sidebar from './components/Sidebar/Sidebar';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import SendTransaction from './pages/SendTransaction/index';
