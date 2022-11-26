@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
@@ -11,16 +11,16 @@ interface IProps {
 }
 
 const Form = (props:IProps) => {
-    const [reciverAddress, setReciverAddress] = useState('')
-    const [wethAmount, setWethAmount] = useState(0)
-    const isGeroli = props.chainId === 5
+    const [reciverAddress, setReciverAddress] = useState('');
+    const [wethAmount, setWethAmount] = useState(0);
+    const isGeroli = props.chainId === 5;
 
     //Store inplementation
     const dispatch = useDispatch();
-    const { addTransaction } = bindActionCreators(actionCreators, dispatch)
+    const { addTransaction } = bindActionCreators(actionCreators, dispatch);
 
     const handleReciverAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setReciverAddress(e.target.value)
+        setReciverAddress(e.target.value);
     }
 
     const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +41,7 @@ const Form = (props:IProps) => {
             params,
         })
 
-        addTransaction(transactionRequest)
+        addTransaction(transactionRequest);
     }
  
     return (

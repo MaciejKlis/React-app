@@ -13,7 +13,7 @@ declare global {
 }
 
 function App() {
-  const base = "/React-app"
+  const base = '/React-app';
 
   return (
     <Router>
@@ -21,8 +21,8 @@ function App() {
       <Navbar />
       <div className="app">
         <Routes>
-          <Route path={base + "/"} element={<Dashboard />}/>
-          <Route path={base + "/send-transaction"} element={<SendTransaction />}/>
+          <Route path={base + '/'} element={<Dashboard />}/>
+          <Route path={base + '/send-transaction'} element={<SendTransaction />}/>
         </Routes>
       </div>
     </Router>

@@ -1,4 +1,4 @@
-import {ActionType} from "../action-types"
+import {ActionType} from '../action-types';
 
 interface AddTransactionAction {
     type: ActionType.ADD_TRANSACTION

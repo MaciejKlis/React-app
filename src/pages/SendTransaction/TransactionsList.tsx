@@ -1,13 +1,12 @@
-import React from "react";
-import { hexShortcuter } from "../../utils/hexShortcuter";
+import { hexShortcuter } from '../../utils/hexShortcuter';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state/reducers';
 
 const Transactions = () => {
-    const transactions = useSelector((state: RootState) => state.transactions)
+    const transactions = useSelector((state: RootState) => state.transactions);
 
     const linkItem = (txn:string) => {
-        const georliExplorer = "https://goerli.etherscan.io/tx/" + txn;
+        const georliExplorer = 'https://goerli.etherscan.io/tx/' + txn;
         const txnShortcut = hexShortcuter(txn) 
         
         return(

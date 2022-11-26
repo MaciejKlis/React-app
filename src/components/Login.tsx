@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Web3 from 'web3';
 import { hexShortcuter }  from '../utils/hexShortcuter';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../state';
 import Wallet from '../types/Wallet';
@@ -20,13 +20,13 @@ declare global {
 const Login = () => {
   const [connecting, setConnecting] = useState(false);
   //Store handling
-  const wallet:Wallet = useSelector((state:RootState) => state.wallet)
+  const wallet:Wallet = useSelector((state:RootState) => state.wallet);
   const dispatch = useDispatch();
-  const { connectWallet, updateChainId, updateWalletAddress, resetWallet, clearTransactions } = bindActionCreators(actionCreators, dispatch)
+  const { connectWallet, updateChainId, updateWalletAddress, resetWallet, clearTransactions } = bindActionCreators(actionCreators, dispatch);
 
   //Web3
   const [provider, setProvider] = useState(window.ethereum);
-  const [web3, setWeb3] = useState(new Web3())
+  const [web3, setWeb3] = useState(new Web3());
 
   //Detect provider
   const detectProvider = () => {
@@ -48,9 +48,9 @@ const Login = () => {
 
   //Try to connect
   const onLoginHandler = async () => {
-    setConnecting(true)
+    setConnecting(true);
     await ethereum.request({ method: 'eth_requestAccounts' });
-    setConnecting(false)
+    setConnecting(false);
     onLogin();
   }
 
@@ -70,7 +70,7 @@ const Login = () => {
       }
 
       if(chainId !== 5) {
-        switchToGeorliNetwork()
+        switchToGeorliNetwork();
       }
 
       observeWalletChanges();
@@ -80,23 +80,23 @@ const Login = () => {
 
   //Handle changes on wallet
   const handleAccountsChanged = async () => {
-    const web3 = new Web3(provider)
-    const accounts = await web3.eth.getAccounts()
+    const web3 = new Web3(provider);
+    const accounts = await web3.eth.getAccounts();
     
     if (accounts.length === 0) {
       onLogoutHandler();
     } else if (accounts[0] !== wallet.walletAddress) {
-      updateWalletAddress(accounts[0])
+      updateWalletAddress(accounts[0]);
     } 
   }
 
   const handleChainChanged = async () => {
-    const web3 = new Web3(provider)
-    const chainId = await web3.eth.getChainId()
-    updateChainId(chainId)
+    const web3 = new Web3(provider);
+    const chainId = await web3.eth.getChainId();
+    updateChainId(chainId);
 
     if(chainId !== 5) {
-      switchToGeorliNetwork()
+      switchToGeorliNetwork();
     }
   }
   
@@ -115,8 +115,8 @@ const Login = () => {
   }
 
   const onLogoutHandler = ():void => {
-    resetWallet()
-    clearTransactions()
+    resetWallet();
+    clearTransactions();
   }
 
   return (
