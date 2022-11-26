@@ -1,8 +1,7 @@
-import React, {useState} from "react";
-import classes from "./TransactionForm.module.css"
+import React, {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators } from '../../../state';
+import { actionCreators } from '../../state';
 
 declare let ethereum: any;
 
@@ -12,16 +11,16 @@ interface IProps {
 }
 
 const Form = (props:IProps) => {
-    const [reciverAddress, setReciverAddress] = useState('')
-    const [wethAmount, setWethAmount] = useState(0)
-    const isGeroli = props.chainId === 5
+    const [reciverAddress, setReciverAddress] = useState('');
+    const [wethAmount, setWethAmount] = useState(0);
+    const isGeroli = props.chainId === 5;
 
     //Store inplementation
     const dispatch = useDispatch();
-    const { addTransaction } = bindActionCreators(actionCreators, dispatch)
+    const { addTransaction } = bindActionCreators(actionCreators, dispatch);
 
     const handleReciverAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setReciverAddress(e.target.value)
+        setReciverAddress(e.target.value);
     }
 
     const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,13 +41,14 @@ const Form = (props:IProps) => {
             params,
         })
 
-        addTransaction(transactionRequest)
+        addTransaction(transactionRequest);
     }
  
     return (
-        <div className={`${classes.formBox}`}>
+        <div className="flex flex-col gap-4">
             {!props.isConnected && <h3>connect test wallet to send transaction</h3>}
             {props.isConnected && !isGeroli && <h3>switch network to georli</h3>}
+            {props.isConnected && isGeroli && <h3>You can send transaction now</h3>}
             <label>Send to:</label>
             <input disabled={!(props.isConnected && isGeroli)} type="text" name="address" onChange={handleReciverAddress} placeholder="ex. 0x2fa1B5dF32e7EfE18f2924ad574f3A653c844e79"/>
             <label>Amount:</label>
