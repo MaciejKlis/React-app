@@ -43,18 +43,22 @@ const Sidebar = () => {
                         <ListItemText>Send Transaction</ListItemText>
                     </MenuItem>
                 </Link>
-                <MenuItem disabled={true}>
-                    <ListItemIcon>
-                        <FeedSharpIcon 
-                            fontSize="medium" 
-                            sx={{
-                                color: '#fff',
-                                height: '45px',
-                            }}
-                        />
-                    </ListItemIcon>
-                    <ListItemText>Use Smart Contract</ListItemText>
-                </MenuItem>
+                
+                <Link to="/React-app/mint-nft">
+                    <MenuItem selected={'/React-app/mint-nft' === location.pathname}>
+                        <ListItemIcon>
+                            <FeedSharpIcon 
+                                fontSize="medium" 
+                                sx={{
+                                    color: '#fff',
+                                    height: '45px',
+                                }}
+                            />
+                        </ListItemIcon>
+                        <ListItemText>Mint NFT</ListItemText>
+                    </MenuItem>
+                </Link>
+
             </MenuList>
         </div>
     )
